@@ -1,0 +1,115 @@
+// Variables for colors and effects
+$primary-color: #00bcd4; // Cyan for neon glow
+$background-color: #1b1b1b; // Dark metallic black
+$text-color: #f1f1f1; // Light grey text
+$hover-color: #008c99; // Darker hover effect
+
+// Global Reset
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// Body & Background
+body {
+  background-color: $background-color;
+  font-family: 'Orbitron', sans-serif;
+  color: $text-color;
+  overflow: hidden;
+}
+
+// Starship Clock Container
+.App {
+  text-align: center;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+}
+
+// Glowing border for clock
+.App-header {
+  background-color: #333;
+  border-radius: 10px;
+  box-shadow: 0 0 30px 5px $primary-color;
+  padding: 50px;
+  position: relative;
+  z-index: 1;
+}
+
+// Glowing buttons for interaction
+button {
+  background-color: transparent;
+  border: 2px solid $primary-color;
+  color: $primary-color;
+  font-size: 18px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: $primary-color;
+    color: #fff;
+    box-shadow: 0 0 20px 5px $primary-color;
+  }
+}
+
+// Glitch effect for text
+.glitch {
+  position: relative;
+  font-size: 3rem;
+  color: $text-color;
+  text-transform: uppercase;
+
+  &::after, &::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    text-shadow: 0 0 5px $primary-color, 0 0 10px $primary-color;
+    animation: glitch 2s infinite;
+  }
+
+  &::before {
+    left: -2px;
+    text-shadow: 2px 0 5px #ff0000, -2px 0 5px #00ff00;
+  }
+
+  &::after {
+    left: 2px;
+    text-shadow: -2px 0 5px #0000ff, 2px 0 5px #ff00ff;
+  }
+}
+
+@keyframes glitch {
+  0% { transform: skew(-2deg); }
+  50% { transform: skew(2deg); }
+  100% { transform: skew(-2deg); }
+}
+
+// Scan lines effect
+@keyframes scanlines {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+#background-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+  filter: brightness(50%);
+}
